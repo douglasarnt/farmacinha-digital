@@ -1,0 +1,29 @@
+:root {
+  --brand: #0f766e;
+  --brand-dark: #115e59;
+  --brand-soft: #ccfbf1;
+}
+body { background: #f4f7f6; padding-top: 56px; min-height: 100vh; display: flex; flex-direction: column; }
+.bg-brand { background: var(--brand); }
+.bg-brand-soft { background: var(--brand-soft); color: var(--brand-dark); }
+.btn-brand { background: var(--brand); border-color: var(--brand); color: #fff; }
+.btn-brand:hover, .btn-brand:focus { background: var(--brand-dark); border-color: var(--brand-dark); color: #fff; }
+.btn-outline-brand { color: var(--brand); border-color: var(--brand); }
+.btn-outline-brand:hover { background: var(--brand); color: #fff; }
+a { color: var(--brand); }
+
+/* Menu lateral (visível a partir de telas grandes; no celular vira offcanvas) */
+.sidebar { position: fixed; top: 56px; bottom: 0; left: 0; background: #fff; border-right: 1px solid #e3e8e7; overflow-y: auto; }
+.nav-pills .nav-link { color: #334155; }
+.nav-pills .nav-link.active { background: var(--brand); color: #fff; }
+.nav-pills .nav-link i { margin-right: .5rem; }
+
+.conteudo { flex: 1; }
+.rodape { border-top: 1px solid #e3e8e7; background: #fff; }
+
+/* Cartões do painel */
+.card { border: 1px solid #e3e8e7; border-radius: .75rem; }
+.card-stat { transition: transform .15s, box-shadow .15s; color: inherit; }
+.card-stat:hover { transform: translateY(-2px); box-shadow: 0 .5rem 1rem rgba(0,0,0,.08); }
+.stat-icon { width: 2.5rem; height: 2.5rem; border-radius: .6rem; display: grid; place-items: center; font-size: 1.25rem; margin-bottom: .5rem; }
+.stat-num { font-size: 2rem; font-weight: 700; line-height: 1; color: #0f172a; }

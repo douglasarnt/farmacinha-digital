@@ -1,0 +1,16 @@
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <h1 class="h3 mb-0">Lembrete <span class="badge text-bg-<%= item.ativo ? 'success' : 'secondary' %> fs-6"><%= item.ativo ? 'Ativo' : 'Inativo' %></span></h1>
+  <div class="d-flex gap-2">
+    <a href="/lembretes/<%= item._id %>/editar" class="btn btn-outline-primary"><i class="bi bi-pencil"></i> Editar</a>
+    <a href="/lembretes" class="btn btn-outline-secondary">Voltar</a>
+  </div>
+</div>
+<div class="card card-body">
+  <dl class="row mb-0">
+    <dt class="col-sm-3">Medicamento</dt>
+    <dd class="col-sm-9"><% if (item.medicamento) { %><a href="/medicamentos/<%= item.medicamento._id %>"><%= item.medicamento.nome %></a> (<%= item.medicamento.dosagem %>)<% } else { %>(removido)<% } %></dd>
+    <dt class="col-sm-3">Horário</dt><dd class="col-sm-9"><%= item.horario %></dd>
+    <dt class="col-sm-3">Frequência</dt><dd class="col-sm-9"><%= item.frequencia %></dd>
+    <dt class="col-sm-3">Observação</dt><dd class="col-sm-9"><%= item.observacao || '-' %></dd>
+  </dl>
+</div>

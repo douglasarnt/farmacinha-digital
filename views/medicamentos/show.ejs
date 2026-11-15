@@ -1,0 +1,36 @@
+<% const s = statusValidade(item, hoje); %>
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <h1 class="h3 mb-0"><%= item.nome %> <span class="badge text-bg-<%= s.classe %> fs-6"><%= s.texto %></span></h1>
+  <div class="d-flex gap-2">
+    <a href="/medicamentos/<%= item._id %>/editar" class="btn btn-outline-primary"><i class="bi bi-pencil"></i> Editar</a>
+    <a href="/medicamentos" class="btn btn-outline-secondary">Voltar</a>
+  </div>
+</div>
+
+<div class="card card-body mb-4">
+  <dl class="row mb-0">
+    <dt class="col-sm-3">Dosagem</dt><dd class="col-sm-9"><%= item.dosagem %></dd>
+    <dt class="col-sm-3">Validade</dt><dd class="col-sm-9"><%= fmtData(item.validade) %></dd>
+    <dt class="col-sm-3">Quantidade</dt><dd class="col-sm-9"><%= item.quantidade ?? '-' %></dd>
+    <dt class="col-sm-3">Descartado</dt><dd class="col-sm-9"><%= item.descartado ? 'Sim' : 'Não' %></dd>
+  </dl>
+  <% if (!item.descartado && s.classe === 'danger') { %>
+    <div class="alert alert-danger mt-3 mb-0"><i class="bi bi-recycle"></i> Este medicamento está vencido. Não jogue no lixo comum, na pia ou no vaso: leve a um <a href="/pontos?ativo=sim" class="alert-link">ponto de coleta</a>.</div>
+  <% } %>
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-2">
+  <h2 class="h5 mb-0">Lembretes deste medicamento</h2>
+  <a href="/lembretes/novo?medicamento=<%= item._id %>" class="btn btn-sm btn-brand"><i class="bi bi-plus-circle"></i> Novo lembrete</a>
+</div>
+<div class="card">
+  <ul class="list-group list-group-flush">
+    <% if (lembretes.length === 0) { %><li class="list-group-item text-muted">Nenhum lembrete cadastrado.</li><% } %>
+    <% lembretes.forEach(l => { %>
+      <li class="list-group-item d-flex justify-content-between">
+        <span><strong><%= l.horario %></strong> · <%= l.frequencia %> <% if (l.observacao) { %><small class="text-muted">— <%= l.observacao %></small><% } %></span>
+        <span class="badge text-bg-<%= l.ativo ? 'success' : 'secondary' %>"><%= l.ativo ? 'Ativo' : 'Inativo' %></span>
+      </li>
+    <% }) %>
+  </ul>
+</div>

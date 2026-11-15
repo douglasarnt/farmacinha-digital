@@ -1,0 +1,67 @@
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <h1 class="h3 mb-0">Lembretes</h1>
+  <a href="/lembretes/novo" class="btn btn-brand"><i class="bi bi-plus-circle"></i> Novo lembrete</a>
+</div>
+
+<form method="GET" action="/lembretes" class="card card-body mb-3">
+  <div class="row g-2 align-items-end">
+    <div class="col-md-4">
+      <label class="form-label small mb-1">Pesquisar por medicamento</label>
+      <input type="text" name="q" value="<%= q %>" class="form-control" placeholder="Ex.: Losartana">
+    </div>
+    <div class="col-6 col-md-3">
+      <label class="form-label small mb-1">Horário</label>
+      <select name="faixa" class="form-select">
+        <option value="">Todos</option>
+        <option value="manha" <%= faixa === 'manha' ? 'selected' : '' %>>Manhã (05h–12h)</option>
+        <option value="tarde" <%= faixa === 'tarde' ? 'selected' : '' %>>Tarde (12h–18h)</option>
+        <option value="noite" <%= faixa === 'noite' ? 'selected' : '' %>>Noite (18h–05h)</option>
+      </select>
+    </div>
+    <div class="col-6 col-md-2">
+      <label class="form-label small mb-1">Ativo</label>
+      <select name="ativo" class="form-select">
+        <option value="">Todos</option>
+        <option value="sim" <%= ativo === 'sim' ? 'selected' : '' %>>Sim</option>
+        <option value="nao" <%= ativo === 'nao' ? 'selected' : '' %>>Não</option>
+      </select>
+    </div>
+    <div class="col-md-3 d-flex gap-2">
+      <button class="btn btn-brand flex-fill"><i class="bi bi-search"></i> Filtrar</button>
+      <a href="/lembretes" class="btn btn-outline-secondary">Limpar</a>
+    </div>
+  </div>
+</form>
+
+<div class="card">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-light">
+        <tr><th>Medicamento</th><th>Horário</th><th>Frequência</th><th>Situação</th><th class="text-end">Ações</th></tr>
+      </thead>
+      <tbody>
+        <% if (itens.length === 0) { %>
+          <tr><td colspan="5" class="text-center text-muted py-4">Nenhum lembrete encontrado.</td></tr>
+        <% } %>
+        <% itens.forEach(l => { %>
+          <tr>
+            <td class="fw-semibold">
+              <% if (l.medicamento) { %><%= l.medicamento.nome %> <small class="text-muted"><%= l.medicamento.dosagem %></small><% } else { %><span class="text-muted">(removido)</span><% } %>
+            </td>
+            <td><i class="bi bi-clock"></i> <%= l.horario %></td>
+            <td><%= l.frequencia %></td>
+            <td><span class="badge text-bg-<%= l.ativo ? 'success' : 'secondary' %>"><%= l.ativo ? 'Ativo' : 'Inativo' %></span></td>
+            <td class="text-end text-nowrap">
+              <a href="/lembretes/<%= l._id %>" class="btn btn-sm btn-outline-secondary" title="Visualizar"><i class="bi bi-eye"></i></a>
+              <a href="/lembretes/<%= l._id %>/editar" class="btn btn-sm btn-outline-primary" title="Editar"><i class="bi bi-pencil"></i></a>
+              <form action="/lembretes/<%= l._id %>?_method=DELETE" method="POST" class="d-inline" onsubmit="return confirm('Excluir este lembrete?');">
+                <button class="btn btn-sm btn-outline-danger" title="Excluir"><i class="bi bi-trash"></i></button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<p class="text-muted small mt-2"><%= itens.length %> registro(s)</p>

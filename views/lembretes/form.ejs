@@ -1,0 +1,49 @@
+<h1 class="h3 mb-3"><%= titulo %></h1>
+
+<% if (erros) { %>
+  <div class="alert alert-danger"><ul class="mb-0"><% erros.forEach(e => { %><li><%= e %></li><% }) %></ul></div>
+<% } %>
+
+<% if (medicamentos.length === 0) { %>
+  <div class="alert alert-warning">Cadastre um <a href="/medicamentos/novo" class="alert-link">medicamento</a> antes de criar um lembrete.</div>
+<% } %>
+
+<form method="POST" action="<%= editando ? '/lembretes/' + item._id + '?_method=PUT' : '/lembretes' %>" class="card card-body">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">Medicamento *</label>
+      <select name="medicamento" class="form-select" required>
+        <option value="">Selecione...</option>
+        <% medicamentos.forEach(m => { %>
+          <option value="<%= m._id %>" <%= String(item.medicamento) === String(m._id) ? 'selected' : '' %>><%= m.nome %> (<%= m.dosagem %>)</option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Horário *</label>
+      <input type="time" name="horario" class="form-control" value="<%= item.horario || '' %>" required>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Frequência *</label>
+      <select name="frequencia" class="form-select" required>
+        <% FREQUENCIAS.forEach(f => { %>
+          <option value="<%= f %>" <%= item.frequencia === f ? 'selected' : '' %>><%= f %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="col-12">
+      <label class="form-label">Observação</label>
+      <input type="text" name="observacao" class="form-control" value="<%= item.observacao || '' %>" placeholder="Ex.: Tomar após o café da manhã">
+    </div>
+    <div class="col-12">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="ativo" id="ativo" <%= item.ativo ? 'checked' : '' %>>
+        <label class="form-check-label" for="ativo">Lembrete ativo</label>
+      </div>
+    </div>
+  </div>
+  <div class="mt-4 d-flex gap-2">
+    <button class="btn btn-brand"><i class="bi bi-check-circle"></i> Salvar</button>
+    <a href="/lembretes" class="btn btn-outline-secondary">Cancelar</a>
+  </div>
+</form>
