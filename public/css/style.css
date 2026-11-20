@@ -13,10 +13,28 @@ body { background: #f4f7f6; padding-top: 56px; min-height: 100vh; display: flex;
 a { color: var(--brand); }
 
 /* Menu lateral (visível a partir de telas grandes; no celular vira offcanvas) */
-.sidebar { position: fixed; top: 56px; bottom: 0; left: 0; width: 16.666667%; background: #fff; border-right: 1px solid #e3e8e7; overflow-y: auto; z-index: 1000; }
+@media (min-width: 992px) {
+  .sidebar {
+    position: fixed;
+    top: 56px;
+    bottom: 0;
+    left: 0;
+    width: 16.666667%;
+    background: #fff;
+    border-right: 1px solid #e3e8e7;
+    overflow-y: auto;
+    z-index: 1000;
+  }
+  main.conteudo {
+    margin-left: 16.666667% !important;
+    width: 83.333333% !important;
+  }
+}
 .nav-pills .nav-link { color: #334155; }
 .nav-pills .nav-link.active { background: var(--brand); color: #fff; }
 .nav-pills .nav-link i { margin-right: .5rem; }
+
+
 
 body > .container-fluid { flex: 1; }
 .rodape { border-top: 1px solid #e3e8e7; background: #fff; }
