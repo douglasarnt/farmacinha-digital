@@ -18,7 +18,7 @@ a { color: var(--brand); }
 .nav-pills .nav-link.active { background: var(--brand); color: #fff; }
 .nav-pills .nav-link i { margin-right: .5rem; }
 
-.conteudo { flex: 1; }
+body > .container-fluid { flex: 1; }
 .rodape { border-top: 1px solid #e3e8e7; background: #fff; }
 
 /* Cartões do painel */
