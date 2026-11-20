@@ -25,10 +25,15 @@ a { color: var(--brand); }
     overflow-y: auto;
     z-index: 1000;
   }
-  main.conteudo {
-    margin-left: 16.666667% !important;
-    width: 83.333333% !important;
+   body > .container-fluid {
+    padding-left: 18% !important;
   }
+  main.conteudo {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+  }
+
 }
 .nav-pills .nav-link { color: #334155; }
 .nav-pills .nav-link.active { background: var(--brand); color: #fff; }
