@@ -21,12 +21,12 @@ a { color: var(--brand); }
 body > .container-fluid { flex: 1; }
 @media (min-width: 992px) {
   body > .container-fluid {
-    padding-left: 260px;
+    padding-left: 260px !important;
   }
 }
 .rodape { border-top: 1px solid #e3e8e7; background: #fff; }
 
-.rodape { border-top: 1px solid #e3e8e7; background: #fff; }
+
 
 /* Cartões do painel */
 .card { border: 1px solid #e3e8e7; border-radius: .75rem; }
