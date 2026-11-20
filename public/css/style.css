@@ -13,39 +13,17 @@ body { background: #f4f7f6; padding-top: 56px; min-height: 100vh; display: flex;
 a { color: var(--brand); }
 
 /* Menu lateral (visível a partir de telas grandes; no celular vira offcanvas) */
-@media (min-width: 992px) {
-  .sidebar {
-    position: fixed;
-    top: 56px;
-    bottom: 0;
-    left: 0;
-    width: 16.666667%;
-    background: #fff;
-    border-right: 1px solid #e3e8e7;
-    overflow-y: auto;
-    z-index: 1000;
-  }
-   body > .container-fluid {
-    padding-left: 18% !important;
-  }
-  main.conteudo {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin-left: 0 !important;
-  }
-
-}
+.sidebar { width: 240px; position: fixed; top: 56px; bottom: 0; left: 0; background: #fff; border-right: 1px solid #e3e8e7; overflow-y: auto; }
 .nav-pills .nav-link { color: #334155; }
 .nav-pills .nav-link.active { background: var(--brand); color: #fff; }
 .nav-pills .nav-link i { margin-right: .5rem; }
 
-
-
-body > .container-fluid { flex: 1; }
+/* Conteúdo principal: ocupa o espaço restante; no desktop, deixa 240px para o menu lateral */
+.conteudo { flex: 1; }
+@media (min-width: 992px) {
+  .conteudo, .rodape { margin-left: 240px; }
+}
 .rodape { border-top: 1px solid #e3e8e7; background: #fff; }
-
-
-
 
 /* Cartões do painel */
 .card { border: 1px solid #e3e8e7; border-radius: .75rem; }
