@@ -41,7 +41,7 @@ app.use('/pontos', require('./routes/pontos'));
 
 // 404
 app.use((req, res) => {
-  res.status(404).render('erro', { titulo: 'Página não encontrada', erro: 'O endereço acessado não existe.' });
+  res.status(404).render('erro', { titulo: 'Página não existe', erro: 'O endereço acessado não foi encontrado.' });
 });
 
 // Erros gerais
